@@ -1664,6 +1664,16 @@
 </html>
 
 <script>
+  $("#del_filter").click(function() {
+    $(".catalog_aside_main .smart-filter-parameters-box").removeClass("bx-active");
+    $(".catalog_aside_main .smart-filter-block").slideUp();
+  });
+
+  $("#set_filter").click(function() {
+    $(".catalog_aside_main .smart-filter-parameters-box").removeClass("bx-active");
+    $(".catalog_aside_main .smart-filter-block").slideUp();
+  });
+  
   const minInput = $('#arrFilter_P1_MIN');
   const maxInput = $('#arrFilter_P1_MAX');
 

@@ -690,7 +690,7 @@
       </div>
     </section>
 
-    <section class="slider">
+    <section class="slider slider-down">
       <div class="container">
         <h2>Сертификаты и тесты качества</h2>
         <div class="slider_wrap">
@@ -1328,31 +1328,3 @@
 
   </body>
 </html>
-
-<script>
-  const minInput = $('#arrFilter_P1_MIN');
-  const maxInput = $('#arrFilter_P1_MAX');
-
-  const minPrice = 0;
-  const maxPrice = 100000;
-
-  $("#price-range").slider({
-    range: true,
-    min: minPrice,
-    max: maxPrice,
-    values: [minPrice, maxPrice],
-    slide: function (event, ui) {
-      minInput.val(ui.values[0]);
-      maxInput.val(ui.values[1]);
-    }
-  });
-
-  // синхронизация input → slider
-  minInput.on('change', function () {
-    $("#price-range").slider('values', 0, this.value);
-  });
-
-  maxInput.on('change', function () {
-    $("#price-range").slider('values', 1, this.value);
-  });
-</script>

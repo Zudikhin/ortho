@@ -27,6 +27,40 @@ $(document).ready(function() {
     $(".header_main_right_search").removeClass("active");
   });
 
+  // product slider 
+  const $for = $('.product_wrap_images_for');
+  const $navItems = $('.product_wrap_images_nav_item');
+
+  $for.on('init reInit afterChange', function (event, slick, currentSlide) {
+    const idx = (typeof currentSlide === 'number') ? currentSlide : 0;
+    $navItems.removeClass('is-active').eq(idx).addClass('is-active');
+  });
+
+  $for.slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    dots: false,
+  });
+
+  $navItems.each(function (i) {
+    $(this).attr('data-slide', i);
+  });
+
+  $(document).on('click', '.product_wrap_images_nav_item', function () {
+    const i = parseInt($(this).attr('data-slide'), 10) || 0;
+    $for.slick('slickGoTo', i);
+  });
+
+  $("#openBarcode").click(function() {
+    $(".product_wrap_text_barcode_list").slideToggle();
+  });
+
+  $(".measure_warning_close").click(function() {
+    $(this).closest(".measure_warning").addClass("hide");
+  });
+
   // мобильное меню 
   $(function () {
     const $dropdown = $('.dropdown');
@@ -205,12 +239,39 @@ $(document).ready(function() {
     $('#imageModal').modal('show');
   });
 
+  $('.photo_item').on('click', function () {
+    var srcImg = $(this).find("img").attr('src')
+    $('#imageModal img').attr('src', srcImg);
+    $('#imageModal').modal('show');
+  });
+
   $(".schedule_title_choice_item").click(function() {
     var id = $(this).attr("data-target");
     $(".schedule_title_choice_item").removeClass("active");
     $(this).addClass("active");
     $(".schedule_toggle").removeClass("active");
     $(`#${id}`).addClass("active");
+  });
+
+  $(".more_text_btns_show").click(function() {
+    $(this).closest(".more_text").addClass("is-open");
+  });
+
+  $(".more_text_btns_hide").click(function() {
+    $(this).closest(".more_text").removeClass("is-open");
+  });
+
+  $('.section_table_title select').on('change', function () {
+    const index = $(this).prop('selectedIndex');
+    $('.section_table_item')
+      .removeClass('active')
+      .eq(index)
+      .addClass('active');
+  });
+
+  $(".faq_item_head").click(function() {
+    $(this).closest(".faq_item").toggleClass("active");
+    $(this).parent().find(".faq_item_body").slideToggle();
   });
 
 });
